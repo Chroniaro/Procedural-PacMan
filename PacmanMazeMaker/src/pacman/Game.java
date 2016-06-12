@@ -25,7 +25,7 @@ public class Game {
 	public Game() {
 		
 		updates = -200;
-		maze = Maze.create(10, 7);
+		maze = Maze.create(15, 20);
 		player = new PacEntity(maze, maze.playerStart().x, maze.playerStart().y);
 		keys = new boolean[4];
 		resetGhosts();
