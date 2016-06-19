@@ -87,7 +87,7 @@ public class PacComponent extends JComponent {
 				
 			}
 			
-			if(ghost.scared)
+			if(ghost.scared && (game.player.power > 99 || game.player.power % 25 < 12))
 				g2d.setColor(Color.blue);
 			else
 				g2d.setColor(ghost.color);

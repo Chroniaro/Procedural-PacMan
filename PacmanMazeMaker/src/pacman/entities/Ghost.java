@@ -9,7 +9,7 @@ import pacman.maze.Maze.Direction;
 
 public class Ghost extends Entity {
 	
-	public static double[][] ghostShape = new double[][] {
+	public final static double[][] ghostShape = new double[][] {
 		{0.1, 0.3},{0.2, 0.1}, {0.8, 0.1}, {0.9, .3}, {0.9, 0.9}, {0.8, 0.7}, {0.5, 0.9}, {0.2, 0.7}, {0.1, 0.9}
 	};
 	
@@ -91,6 +91,7 @@ public class Ghost extends Entity {
 		this.y = origin.y;
 		jailTime = 500;
 		out = false;
+		scared = false;
 		speed = 0;
 		
 	}

@@ -122,7 +122,8 @@ public class Game {
 							
 							resetGhosts();
 							updates = -200;
-							if(player.die()) text = "You Lose!";
+							if(player.die()) 
+								text = "You Lose!";
 							
 						}
 						
@@ -131,7 +132,10 @@ public class Game {
 					
 				}
 				
-				g.scared = player.power > 0;
+				if(g.scared)
+					g.scared = player.power > 0;
+				else
+					g.scared = player.power > 495;
 				
 				if(g.scared) g.target(new Point((int)player.x, (int)player.y));
 				
