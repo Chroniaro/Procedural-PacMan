@@ -6,6 +6,7 @@ import pacman.maze.Maze.Direction;
 
 public class Player extends Entity {
 	
+	public final static int MAX_POWER = 500;
 	public int mouthAngle = 10;
 	int mouthSpeed = 2;
 	final static int MOUTH_WIDTH = 40;
@@ -40,7 +41,7 @@ public class Player extends Entity {
 				maze.dotCount --;
 				
 				if(maze.isBigFood(2 * (int)(x / 2) + 1, 2 * (int)(y / 2) + 1))
-					power = 500;
+					power = MAX_POWER;
 				
 			}
 			

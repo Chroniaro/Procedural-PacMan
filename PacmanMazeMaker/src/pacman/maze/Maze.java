@@ -253,18 +253,18 @@ public class Maze {
 			for(int y = area.y; y < area.y + area.height; y++) {
 				
 				if(isDot(x, y)) {
+						
+					boolean[] corners = new boolean[]{false, false, false, false}; //top left, top right, bottom left, bottom right
 					
-					if(isDot(x + 2, y)) {
-						
-						tiles[x + 1][y] = 2;
-						
-					}
+					if(!isWall(tiles[x-2][y-1]) || !isWall(tiles[x-1][y-2])) corners[0] = true;
+					if(!isWall(tiles[x+2][y-1]) || !isWall(tiles[x+1][y-2])) corners[1] = true;
+					if(!isWall(tiles[x-2][y+1]) || !isWall(tiles[x-1][y+2])) corners[2] = true;
+					if(!isWall(tiles[x+2][y+1]) || !isWall(tiles[x+1][y+2])) corners[3] = true;
 					
-					if(isDot(x, y+2)) {
-						
-						tiles[x][y + 1] = 2;
-						
-					}
+					if(corners[0] && corners[1]) tiles[x][y-1] = 2; //top
+					else if(corners[1] && corners[3]) tiles[x+1][y] = 2; //right
+					else if(corners[2] && corners[3]) tiles[x][y+1] = 2; //bottom
+					else if(corners[0] && corners[2]) tiles[x-1][y] = 2; //left
 					
 				}
 				

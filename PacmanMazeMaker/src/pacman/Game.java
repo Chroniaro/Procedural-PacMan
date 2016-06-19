@@ -25,7 +25,7 @@ public class Game {
 	public Game() {
 		
 		updates = -200;
-		maze = Maze.create(15, 20);
+		maze = Maze.create(20, 40);
 		player = new Player(maze, maze.playerStart().x, maze.playerStart().y);
 		keys = new boolean[4];
 		resetGhosts();
@@ -135,7 +135,7 @@ public class Game {
 				if(g.scared)
 					g.scared = player.power > 0;
 				else
-					g.scared = player.power > 495;
+					g.scared = player.power > Player.MAX_POWER - 5;
 				
 				if(g.scared) g.target(new Point((int)player.x, (int)player.y));
 				

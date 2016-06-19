@@ -104,39 +104,40 @@ public class PacComponent extends JComponent {
 		Rectangle pac = getTileBounds(game.player.x, game.player.y, size, offset);
 		g2d.setColor(Color.yellow);
 		
-		switch(game.player.dir) {
-		
-		case up:
-			g2d.fillArc(pac.x, pac.y, pac.width, pac.height, 90 + game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
-			g2d.setColor(Color.black);
-			g2d.fillOval(pac.x + pac.width * 4/9, pac.y + pac.height * 5/9, pac.width * 2/9, pac.height * 2/9);
-			break;
+		if(game.player.mouthAngle < 180)
+			switch(game.player.dir) {
 			
-		case right:
-			g2d.fillArc(pac.x, pac.y, pac.width, pac.height, game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
-			g2d.setColor(Color.black);
-			g2d.fillOval(pac.x + pac.width * 3/9, pac.y + pac.height * 4/9, pac.width * 2/9, pac.height * 2/9);
-			break;
+			case up:
+				g2d.fillArc(pac.x, pac.y, pac.width, pac.height, 90 + game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
+				g2d.setColor(Color.black);
+				g2d.fillOval(pac.x + pac.width * 4/9, pac.y + pac.height * 5/9, pac.width * 2/9, pac.height * 2/9);
+				break;
+				
+			case right:
+				g2d.fillArc(pac.x, pac.y, pac.width, pac.height, game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
+				g2d.setColor(Color.black);
+				g2d.fillOval(pac.x + pac.width * 3/9, pac.y + pac.height * 4/9, pac.width * 2/9, pac.height * 2/9);
+				break;
+				
+			case down:
+				g2d.fillArc(pac.x, pac.y, pac.width, pac.height, 270 + game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
+				g2d.setColor(Color.black);
+				g2d.fillOval(pac.x + pac.width * 4/9, pac.y + pac.height * 3/9, pac.width * 2/9, pac.height * 2/9);
+				break;
+				
+			case left:
+				g2d.fillArc(pac.x, pac.y, pac.width, pac.height, 180 + game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
+				g2d.setColor(Color.black);
+				g2d.fillOval(pac.x + pac.width * 5/9, pac.y + pac.height * 4/9, pac.width * 2/9, pac.height * 2/9);
+				break;
+				
+			default:
+				g2d.fillOval(pac.x, pac.y, pac.width, pac.height);
+				g2d.setColor(Color.black);
+				g2d.fillOval(pac.x + pac.width * 4/9, pac.y + pac.height * 4/9, pac.width * 2/9, pac.height * 2/9);
+				break;
 			
-		case down:
-			g2d.fillArc(pac.x, pac.y, pac.width, pac.height, 270 + game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
-			g2d.setColor(Color.black);
-			g2d.fillOval(pac.x + pac.width * 4/9, pac.y + pac.height * 3/9, pac.width * 2/9, pac.height * 2/9);
-			break;
-			
-		case left:
-			g2d.fillArc(pac.x, pac.y, pac.width, pac.height, 180 + game.player.mouthAngle, 360 - 2 * game.player.mouthAngle);
-			g2d.setColor(Color.black);
-			g2d.fillOval(pac.x + pac.width * 5/9, pac.y + pac.height * 4/9, pac.width * 2/9, pac.height * 2/9);
-			break;
-			
-		default:
-			g2d.fillOval(pac.x, pac.y, pac.width, pac.height);
-			g2d.setColor(Color.black);
-			g2d.fillOval(pac.x + pac.width * 4/9, pac.y + pac.height * 4/9, pac.width * 2/9, pac.height * 2/9);
-			break;
-		
-		}
+			}
 		
 		g2d.setColor(Color.white);
 		g2d.setFont(new Font("Arial", Font.BOLD, (int)(size * 1.4)));
