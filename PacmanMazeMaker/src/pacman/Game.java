@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import pacman.entities.Ghost;
-import pacman.entities.PacEntity;
+import pacman.entities.Player;
 import pacman.maze.*;
 import pacman.maze.Maze.Direction;
 
@@ -12,7 +12,7 @@ public class Game {
 	
 	Maze maze;
 	boolean doubled;
-	PacEntity player;
+	Player player;
 	boolean[] keys;
 	boolean started;
 	Ghost[] ghosts;
@@ -26,7 +26,7 @@ public class Game {
 		
 		updates = -200;
 		maze = Maze.create(15, 20);
-		player = new PacEntity(maze, maze.playerStart().x, maze.playerStart().y);
+		player = new Player(maze, maze.playerStart().x, maze.playerStart().y);
 		keys = new boolean[4];
 		resetGhosts();
 		text = "";

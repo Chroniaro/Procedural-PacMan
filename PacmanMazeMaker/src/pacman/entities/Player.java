@@ -4,7 +4,7 @@ import pacman.PacMan;
 import pacman.maze.Maze;
 import pacman.maze.Maze.Direction;
 
-public class PacEntity extends Entity {
+public class Player extends Entity {
 	
 	public int mouthAngle = 10;
 	int mouthSpeed = 2;
@@ -12,7 +12,7 @@ public class PacEntity extends Entity {
 	public int power;
 	public int lives;
 	
-	public PacEntity(Maze maze, int x, int y) {
+	public Player(Maze maze, int x, int y) {
 		
 		super(maze, x, y);
 		
