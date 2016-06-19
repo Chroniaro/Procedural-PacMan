@@ -3,7 +3,6 @@ package pacman;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-
 import pacman.entities.Ghost;
 import pacman.entities.PacEntity;
 import pacman.maze.*;
@@ -21,6 +20,7 @@ public class Game {
 	public String text;
 	public int score;
 	private int previousDotCount;
+	int ghostEatCount = 0;
 	
 	public Game() {
 		
@@ -85,6 +85,9 @@ public class Game {
 			ghosts[2].target(new Point((int)(3 * player.x - 2 * ghosts[0].x), (int)(3 * player.x - 2 * ghosts[0].x)));
 			ghosts[3].random = true;
 			
+			if(player.power == 0)
+				ghostEatCount = 0;
+			
 			for(Ghost g : ghosts) {
 			
 				if(updates >= 3500 && updates % 3500 == 0) {
@@ -107,7 +110,8 @@ public class Game {
 					if(g.scared) {
 						
 						g.reset();
-						score += 200;
+						ghostEatCount++;
+						score += 100 * Math.pow(2, ghostEatCount);
 						
 					} else {
 						

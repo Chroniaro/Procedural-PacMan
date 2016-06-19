@@ -17,7 +17,6 @@ public class PacEntity extends Entity {
 		super(maze, x, y);
 		
 		this.speed = 0.035;
-		
 		this.lead = 0.4;
 		
 		power = 0;

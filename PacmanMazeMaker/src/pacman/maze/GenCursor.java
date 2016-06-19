@@ -120,6 +120,10 @@ public class GenCursor {
 		else if(maze.isWall(x, y + 1) && y < area.y + area.height - 1 && x > area.x +1 && x < area.width - 2)
 			openDirs.add(Direction.down);
 		
+		if(path.size() > 1)
+			if(openDirs.contains(path.get(path.size()-1)))
+				openDirs.remove(path.get(path.size()-1));
+		
 		Direction[] returnedDirs = new Direction[openDirs.size()];
 		openDirs.toArray(returnedDirs);
 		return returnedDirs;
