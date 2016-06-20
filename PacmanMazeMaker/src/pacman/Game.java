@@ -29,7 +29,7 @@ public class Game {
 	public Game() {
 		
 		updates = -200;
-		maze = Maze.create(20, 40);
+		maze = Maze.create(20, 30);
 		player = new Player(maze, maze.playerStart().x, maze.playerStart().y);
 		keys = new boolean[4];
 		resetGhosts();
@@ -116,7 +116,7 @@ public class Game {
 						
 						ghostEatCount++;
 						score += 100 * Math.pow(2, ghostEatCount);
-						splashes.add(new PacComponent.SplashModel("" + 100 * Math.pow(2, ghostEatCount), g.x, g.y));
+						splashes.add(new PacComponent.SplashModel("" + 100 * Math.pow(2, ghostEatCount), g.x, g.y, Color.white));
 						g.reset();
 						
 					} else {
@@ -124,6 +124,7 @@ public class Game {
 						if(!player.deathAnimation()) return;
 						else {
 							
+							splashes.add(new PacComponent.SplashModel("-100", player.x, player.y, Color.red));
 							score = Math.max(0, score - 100);
 							
 							resetGhosts();
