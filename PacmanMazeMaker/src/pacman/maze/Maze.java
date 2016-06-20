@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Maze {
 	
-	public enum Direction { 
+	public static enum Direction { 
 		
 		up, left, down, right; 
 		
@@ -35,6 +35,10 @@ public class Maze {
 		}
 	
 	}
+	public static enum Fruit {
+		none, red, yellow, blue
+	}
+	public Fruit fruit = Fruit.none;
 	public int width, height;
 	public byte[][] tiles;
 	GenCursor[] cursors;

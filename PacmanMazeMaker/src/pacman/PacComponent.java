@@ -78,6 +78,32 @@ public class PacComponent extends JComponent {
 			}
 		}
 		
+		if(game.maze.fruit != Maze.Fruit.none) {
+			
+			switch(game.maze.fruit) {
+			
+			case red:
+				g2d.setColor(Color.PINK);
+				break;
+				
+			case blue:
+				g2d.setColor(Color.CYAN.darker().darker());
+				break;
+				
+			case yellow:
+				g2d.setColor(Color.orange);
+				break;
+				
+			default:
+				break;
+			
+			}
+			
+			Rectangle fruit = getTileBounds(game.maze.playerStart().x, game.maze.playerStart().y, offset);
+			g2d.fillOval(fruit.x, fruit.y, fruit.width, fruit.height);
+			
+		}
+		
 		g2d.setStroke(new BasicStroke(1));
 		
 		for(Ghost ghost : game.ghosts) {
@@ -93,6 +119,8 @@ public class PacComponent extends JComponent {
 			
 			if(ghost.scared && (game.player.power > 99 || game.player.power % 25 < 12))
 				g2d.setColor(Color.blue);
+			else if(ghost.scared)
+				g2d.setColor(Color.white);
 			else
 				g2d.setColor(ghost.color);
 			g2d.fill(ghostShape);
@@ -186,7 +214,7 @@ public class PacComponent extends JComponent {
 				toRemove.add(i);
 		}
 		
-		for(int i : toRemove) {
+		for(Integer i : toRemove) {
 			
 			this.splashText.remove(i);
 			

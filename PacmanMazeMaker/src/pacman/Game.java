@@ -10,6 +10,7 @@ import pacman.entities.Ghost;
 import pacman.entities.Player;
 import pacman.maze.*;
 import pacman.maze.Maze.Direction;
+import pacman.maze.Maze.Fruit;
 
 public class Game {
 	
@@ -25,6 +26,7 @@ public class Game {
 	private int previousDotCount;
 	int ghostEatCount = 0;
 	CopyOnWriteArrayList<PacComponent.SplashModel> splashes;
+	int fruitTime = 0;
 	
 	public Game() {
 		
@@ -50,6 +52,8 @@ public class Game {
 	}
 
 	public void update() {
+		
+		player.power = Player.MAX_POWER;
 		
 		if(started) {
 			
@@ -127,6 +131,9 @@ public class Game {
 							splashes.add(new PacComponent.SplashModel("-100", player.x, player.y, Color.red));
 							score = Math.max(0, score - 100);
 							
+							maze.fruit = Fruit.none;
+							fruitTime = 0;
+							
 							resetGhosts();
 							updates = -200;
 							if(player.die()) 
@@ -149,6 +156,72 @@ public class Game {
 				g.update();
 				
 			}
+			
+			if(maze.fruit != Fruit.none) {
+				
+				if(Math.abs(player.x - maze.playerStart().x) < 1 && Math.abs(player.y - maze.playerStart().y) < 1) {
+					
+					switch(maze.fruit) {
+					
+					case red:
+						score += 500;
+						splashes.add(new PacComponent.SplashModel("500", player.x, player.y, Color.white));
+						break;
+						
+					case yellow:
+						score += 1000;
+						splashes.add(new PacComponent.SplashModel("1000", player.x, player.y, Color.white));
+						break;
+						
+					case blue:
+						score += 2000;
+						splashes.add(new PacComponent.SplashModel("5000", player.x, player.y, Color.cyan));
+						break;
+						
+					default:
+						break;
+					
+					}
+					
+					fruitTime = 0;
+					maze.fruit = Fruit.none;
+					
+				} else if(fruitTime > (1500 + Math.random() * 30000)) {
+					
+					maze.fruit = Fruit.none;
+					fruitTime = 0;
+					
+				}
+				
+			} else {
+				
+				if(fruitTime > 500) {
+					
+					if(Math.random() < 0.0005) {
+						
+						maze.fruit = Fruit.red;
+						fruitTime = 0;
+						
+					}
+					
+					if(Math.random() < 0.0003) {
+						
+						maze.fruit = Fruit.yellow;
+						fruitTime = 0;
+						
+					}
+					
+					if(Math.random() < 0.0001) {
+						
+						maze.fruit = Fruit.blue;
+						fruitTime = 0;
+						
+					}
+					
+				}
+				
+			}
+			fruitTime++;
 			
 			if(maze.dotCount != previousDotCount) {
 			
