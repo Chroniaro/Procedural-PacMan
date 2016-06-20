@@ -3,6 +3,9 @@ package pacman;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import pacman.entities.Ghost;
 import pacman.entities.Player;
 import pacman.maze.*;
@@ -21,6 +24,7 @@ public class Game {
 	public int score;
 	private int previousDotCount;
 	int ghostEatCount = 0;
+	CopyOnWriteArrayList<PacComponent.SplashModel> splashes;
 	
 	public Game() {
 		
@@ -32,6 +36,7 @@ public class Game {
 		text = "";
 		score = 0;
 		previousDotCount = maze.dotCount;
+		splashes = new CopyOnWriteArrayList<>();
 		
 	}
 	
@@ -109,9 +114,10 @@ public class Game {
 					
 					if(g.scared) {
 						
-						g.reset();
 						ghostEatCount++;
 						score += 100 * Math.pow(2, ghostEatCount);
+						splashes.add(new PacComponent.SplashModel("" + 100 * Math.pow(2, ghostEatCount), g.x, g.y));
+						g.reset();
 						
 					} else {
 						
