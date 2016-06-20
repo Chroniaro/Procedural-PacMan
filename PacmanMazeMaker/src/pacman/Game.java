@@ -53,8 +53,6 @@ public class Game {
 
 	public void update() {
 		
-		player.power = Player.MAX_POWER;
-		
 		if(started) {
 			
 			if(updates == -199)
