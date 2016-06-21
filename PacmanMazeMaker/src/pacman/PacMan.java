@@ -41,7 +41,6 @@ public abstract class PacMan {
 		PacComponent view = new PacComponent(game);
 		frame.add(view);
 		frame.pack();
-		view.repaint();
 		
 		long time = 0;
 		

@@ -107,22 +107,32 @@ public class GenCursor {
 		
 		ArrayList<Direction> openDirs = new ArrayList<>();
 		
-		if(maze.isWall(x - 1, y) && x > area.x)
-			openDirs.add(Direction.left);
-		if(maze.isWall(x + 1, y) && x < area.x + area.width - 1)
-			openDirs.add(Direction.right);
-		if(maze.isWall(x, y - 1) && y > area.y + 2)
-			openDirs.add(Direction.up);
-		else if(maze.isWall(x, y - 1) && y > area.y && x > area.x +1 && x < area.width - 2)
-			openDirs.add(Direction.up);
-		if(maze.isWall(x, y + 1) && y < area.y + area.height - 2)
-			openDirs.add(Direction.down);
-		else if(maze.isWall(x, y + 1) && y < area.y + area.height - 1 && x > area.x +1 && x < area.width - 2)
-			openDirs.add(Direction.down);
+		Direction past = null;
+		if(path.size() > 2)
+			past = path.get(path.size() - 2);
 		
-		if(path.size() > 1)
-			if(openDirs.contains(path.get(path.size()-1)))
-				openDirs.remove(path.get(path.size()-1));
+		if(past != Direction.right)
+			if(maze.isWall(x - 1, y) && x > area.x)
+				openDirs.add(Direction.left);
+		if(past != Direction.left)
+			if(maze.isWall(x + 1, y) && x < area.x + area.width - 1)
+				openDirs.add(Direction.right);
+		if(past != Direction.down)
+			if(maze.isWall(x, y - 1) && y > area.y + 2)
+				openDirs.add(Direction.up);
+			else if(maze.isWall(x, y - 1) && y > area.y && x > area.x +1 && x < area.width - 2)
+				openDirs.add(Direction.up);
+		if(past != Direction.up)
+			if(maze.isWall(x, y + 1) && y < area.y + area.height - 2)
+				openDirs.add(Direction.down);
+			else if(maze.isWall(x, y + 1) && y < area.y + area.height - 1 && x > area.x +1 && x < area.width - 2)
+				openDirs.add(Direction.down);
+		
+		if(openDirs.size() > 1) {
+			if(path.size() > 1)
+				if(openDirs.contains(path.get(path.size() - 1)))
+					openDirs.remove(path.get(path.size() - 1));
+		}
 		
 		Direction[] returnedDirs = new Direction[openDirs.size()];
 		openDirs.toArray(returnedDirs);
